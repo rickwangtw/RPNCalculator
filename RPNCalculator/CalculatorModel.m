@@ -67,4 +67,8 @@
     return result;
 }
 
+- (NSString*) description {
+    return [NSString stringWithFormat:@"stack = %@", self.operandStack];
+}
+
 @end
