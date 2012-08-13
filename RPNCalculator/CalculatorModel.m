@@ -61,6 +61,15 @@
     /* constant string is also ok! */
     } else if ([@"*" isEqualToString:operation]) {
         result = [self popOperand] * [self popOperand];
+    } else if ([@"-" isEqualToString:operation]) {
+        result = - [self popOperand] + [self popOperand];
+    } else if ([@"/" isEqualToString:operation]) {
+        double denominator = [self popOperand];
+        if (denominator) {
+            result = [self popOperand] / denominator;
+        } else {
+            result = 0;
+        }
     }
     
     [self pushOperand:result];
