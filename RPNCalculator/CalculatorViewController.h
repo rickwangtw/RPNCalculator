@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface CalculatorViewController : UIViewController
+/*
+    we don't need strong for the display should be hold by the main window
+    IBOutlet == NOTHING
+*/
+@property (weak, nonatomic) IBOutlet UILabel *display;
 
 @end

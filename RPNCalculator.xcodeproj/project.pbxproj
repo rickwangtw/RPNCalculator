@@ -15,6 +15,7 @@
 		0054535A15D90B5B003A1CCA /* CalculatorAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0054535915D90B5B003A1CCA /* CalculatorAppDelegate.m */; };
 		0054535D15D90B5B003A1CCA /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0054535B15D90B5B003A1CCA /* MainStoryboard.storyboard */; };
 		0054536015D90B5B003A1CCA /* CalculatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0054535F15D90B5B003A1CCA /* CalculatorViewController.m */; };
+		0054536815D919E1003A1CCA /* CalculatorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0054536715D919E1003A1CCA /* CalculatorModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,8 @@
 		0054535C15D90B5B003A1CCA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		0054535E15D90B5B003A1CCA /* CalculatorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalculatorViewController.h; sourceTree = "<group>"; };
 		0054535F15D90B5B003A1CCA /* CalculatorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalculatorViewController.m; sourceTree = "<group>"; };
+		0054536615D919E1003A1CCA /* CalculatorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorModel.h; sourceTree = "<group>"; };
+		0054536715D919E1003A1CCA /* CalculatorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +83,8 @@
 				0054535815D90B5B003A1CCA /* CalculatorAppDelegate.h */,
 				0054535915D90B5B003A1CCA /* CalculatorAppDelegate.m */,
 				0054535B15D90B5B003A1CCA /* MainStoryboard.storyboard */,
+				0054536615D919E1003A1CCA /* CalculatorModel.h */,
+				0054536715D919E1003A1CCA /* CalculatorModel.m */,
 				0054535E15D90B5B003A1CCA /* CalculatorViewController.h */,
 				0054535F15D90B5B003A1CCA /* CalculatorViewController.m */,
 				0054535015D90B5B003A1CCA /* Supporting Files */,
@@ -165,6 +170,7 @@
 				0054535615D90B5B003A1CCA /* main.m in Sources */,
 				0054535A15D90B5B003A1CCA /* CalculatorAppDelegate.m in Sources */,
 				0054536015D90B5B003A1CCA /* CalculatorViewController.m in Sources */,
+				0054536815D919E1003A1CCA /* CalculatorModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
