@@ -81,5 +81,12 @@
     NSLog(@"%g", result);
     self.display.text = resultString;
 }
+- (IBAction)dotPressed:(UIButton *)sender {
+    NSRange range = [self.display.text rangeOfString:@"."];
+    
+    if (range.length == 0) {
+        self.display.text = [self.display.text stringByAppendingString:@"."];
+    }
+}
 
 @end
