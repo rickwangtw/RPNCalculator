@@ -14,5 +14,6 @@
     IBOutlet == NOTHING
 */
 @property (weak, nonatomic) IBOutlet UILabel *display;
+@property (weak, nonatomic) IBOutlet UILabel *cmdDisplay;
 
 @end
