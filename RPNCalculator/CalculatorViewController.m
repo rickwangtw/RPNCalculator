@@ -120,4 +120,15 @@
     self.display.text = @"0";
     self.userIsInTheMiddleOfEnteringANumber = NO;
 }
+
+- (IBAction)backPressed:(UIButton *)sender {
+    if (self.userIsInTheMiddleOfEnteringANumber) {
+        NSString* origStr = self.display.text;
+        unsigned length = [origStr length];
+        /* contains chars without including the index */
+        NSString* newStr = [origStr substringToIndex:length - 1];
+        NSLog(@"new string = %@", newStr);
+        self.display.text = newStr;
+    }
+}
 @end
