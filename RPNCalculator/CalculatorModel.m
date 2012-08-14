@@ -91,6 +91,10 @@
     return result;
 }
 
+- (void) resetCalculator {
+    [self.operandStack removeAllObjects];
+}
+
 - (NSString*) description {
     return [NSString stringWithFormat:@"stack = %@", self.operandStack];
 }

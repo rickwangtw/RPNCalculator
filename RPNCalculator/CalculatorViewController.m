@@ -114,5 +114,8 @@
 
 - (IBAction)cPressed {
     self.cmdDisplay.text = @"";
+    [self.brain resetCalculator];
+    self.display.text = @"0";
+    self.userIsInTheMiddleOfEnteringANumber = NO;
 }
 @end
