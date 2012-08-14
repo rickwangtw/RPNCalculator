@@ -108,6 +108,8 @@
     NSRange range = [self.display.text rangeOfString:@"."];
     
     if (range.length == 0) {
+        if (self.userIsInTheMiddleOfEnteringANumber == NO)
+            self.userIsInTheMiddleOfEnteringANumber = YES;
         self.display.text = [self.display.text stringByAppendingString:@"."];
     }
 }
