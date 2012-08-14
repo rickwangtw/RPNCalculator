@@ -7,6 +7,7 @@
 //
 
 #import "CalculatorModel.h"
+#include <math.h>
 
 
 @interface CalculatorModel()
@@ -70,6 +71,20 @@
         } else {
             result = 0;
         }
+    } else if ([operation isEqualToString:@"sin"]) {
+        result = sin([self popOperand]);
+    } else if ([operation isEqualToString:@"cos"]) {
+        result = cos([self popOperand]);
+    } else if ([operation isEqualToString:@"sqrt"]) {
+        double n = [self popOperand];
+        if (n > 0)
+            result = sqrt(n);
+        else {
+            NSLog(@"n = %g cannot be sqrted", n);
+            result = n;
+        }
+    } else if ([operation isEqualToString:@"pi"]) {
+        result = M_PI;
     }
     
     [self pushOperand:result];

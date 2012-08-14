@@ -12,6 +12,7 @@
 @interface CalculatorViewController ()
     // for private methods, properties
 @property (nonatomic) BOOL userIsInTheMiddleOfEnteringANumber;
+@property (nonatomic) BOOL skipEnterKey;
 @property (nonatomic,strong) CalculatorModel* brain;
 @end
 
@@ -19,6 +20,7 @@
 
 @synthesize display = _display;
 @synthesize userIsInTheMiddleOfEnteringANumber = _userIsInTheMiddleOfEnteringANumber;
+@synthesize skipEnterKey = _skipEnterKey;
 @synthesize brain = _brain;
 
 - (CalculatorModel*) brain {
@@ -52,6 +54,7 @@
     [myDisplay setText:newText];
     /* myDisplay.text = newText; */
 #else
+    self.skipEnterKey = NO;
     /* currentTitle is copy? */
     if (self.userIsInTheMiddleOfEnteringANumber) {
         /*
@@ -68,15 +71,23 @@
 }
 
 - (IBAction)enterPressed {
-    [self.brain pushOperand:[self.display.text doubleValue]];
+    if (!self.skipEnterKey)
+        [self.brain pushOperand:[self.display.text doubleValue]];
     self.userIsInTheMiddleOfEnteringANumber = NO;
 }
 
 - (IBAction)operationPressed:(id)sender {
+    NSString* operation = [(UIButton*) sender currentTitle];
+
     /* save an enter */
     if (self.userIsInTheMiddleOfEnteringANumber)
         [self enterPressed];
-    double result = [self.brain performOperation:((UIButton*)sender).currentTitle];
+    double result = [self.brain performOperation:operation];
+    if ([operation isEqualToString:@"pi"]) {
+        self.skipEnterKey = YES;
+    } else {
+        self.skipEnterKey = NO;
+    }
     NSString* resultString = [NSString stringWithFormat:@"%g", result];
     NSLog(@"%g", result);
     self.display.text = resultString;
