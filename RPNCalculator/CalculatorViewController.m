@@ -14,7 +14,8 @@
 @property (nonatomic) BOOL userIsInTheMiddleOfEnteringANumber;
 @property (nonatomic) BOOL skipEnterKey;
 @property (nonatomic,strong) CalculatorModel* brain;
-- (void) insertCmdToDisplay:(NSString*) cmd;
+@property (nonatomic,strong) NSString* cmd;
+- (void) insertCmdToDisplay:(NSString*) cmd showEqual:(BOOL)enable;
 @end
 
 @implementation CalculatorViewController
@@ -24,10 +25,19 @@
 @synthesize userIsInTheMiddleOfEnteringANumber = _userIsInTheMiddleOfEnteringANumber;
 @synthesize skipEnterKey = _skipEnterKey;
 @synthesize brain = _brain;
+@synthesize cmd;
 
-- (void) insertCmdToDisplay:(NSString *)cmd {
-    self.cmdDisplay.text = [self.cmdDisplay.text stringByAppendingString:@" "];
-    self.cmdDisplay.text = [self.cmdDisplay.text stringByAppendingString: cmd];
+- (void) insertCmdToDisplay:(NSString *)added showEqual:(BOOL)enable {
+    if (self.cmd == nil) {
+        self.cmd = @"";
+    }
+    self.cmd = [self.cmd stringByAppendingString:@" "];
+    self.cmd = [self.cmd stringByAppendingString:added];
+    if (enable) {
+        self.cmdDisplay.text = [self.cmd stringByAppendingString:@" ="];
+    } else {
+        self.cmdDisplay.text = self.cmd;
+    }
 }
 
 - (CalculatorModel*) brain {
@@ -81,7 +91,7 @@
     if (!self.skipEnterKey) {
         double value = self.display.text.doubleValue;
         [self.brain pushOperand:value];
-        [self insertCmdToDisplay:[NSString stringWithFormat:@"%g", value]];
+        [self insertCmdToDisplay:[NSString stringWithFormat:@"%g", value] showEqual:NO];
     }
     self.userIsInTheMiddleOfEnteringANumber = NO;
 }
@@ -92,7 +102,7 @@
     /* save an enter */
     if (self.userIsInTheMiddleOfEnteringANumber)
         [self enterPressed];
-    [self insertCmdToDisplay:operation];
+    [self insertCmdToDisplay:operation showEqual:YES];
     
     double result = [self.brain performOperation:operation];
     if ([operation isEqualToString:@"pi"]) {
