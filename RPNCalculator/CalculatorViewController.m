@@ -128,6 +128,7 @@
     self.cmdDisplay.text = @"";
     [self.brain resetCalculator];
     self.display.text = @"0";
+    self.cmd = @"";
     self.userIsInTheMiddleOfEnteringANumber = NO;
 }
 
