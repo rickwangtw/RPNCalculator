@@ -141,4 +141,20 @@
         self.display.text = newStr;
     }
 }
+
+- (IBAction)negativeTogglePressed:(UIButton *)sender {
+    NSString* newStr;
+    if (self.userIsInTheMiddleOfEnteringANumber) {
+        if (self.display.text.doubleValue > 0) {
+            newStr = @"-";
+            newStr = [newStr stringByAppendingString:self.display.text];
+        } else {
+            newStr = [self.display.text substringFromIndex:1];
+        }
+        self.display.text = newStr;
+    } else {
+        /* if the user is not entering a number, use it as an operation */
+        [self operationPressed:sender];
+    }
+}
 @end
