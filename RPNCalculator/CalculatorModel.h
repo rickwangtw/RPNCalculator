@@ -14,4 +14,10 @@
 - (double)performOperation:(NSString*)operation;
 - (void)resetCalculator;
 
+/* use id to gain flexibility of this interface */
+@property (readonly) id program;
+
++ (double) runProgram:(id)program;
++ (NSString*) descriptionOfProgram:(id)program;
+
 @end
