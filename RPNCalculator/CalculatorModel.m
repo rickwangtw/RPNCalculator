@@ -85,29 +85,40 @@
             } else {
                 result = 0;
             }
+        } else if ([operation isEqualToString:@"sin"]) {
+            result = sin([self popOperandOffStack:stack]);
+        } else if ([operation isEqualToString:@"cos"]) {
+            result = cos([self popOperandOffStack:stack]);
+        } else if ([operation isEqualToString:@"sqrt"]) {
+            double n = [self popOperandOffStack:stack];
+            if (n > 0)
+                result = sqrt(n);
+            else {
+                NSLog(@"n = %g cannot be sqrted", n);
+                result = n;
+            }
+        } else if ([operation isEqualToString:@"pi"]) {
+            result = M_PI;
+        } else if ([operation isEqualToString:@"+/-"]) {
+            result = [self popOperandOffStack:stack] * -1;
         }
-    } else if ([operation isEqualToString:@"sin"]) {
-        result = sin([self popOperand]);
-    } else if ([operation isEqualToString:@"cos"]) {
-        result = cos([self popOperand]);
-    } else if ([operation isEqualToString:@"sqrt"]) {
-        double n = [self popOperand];
-        if (n > 0)
-            result = sqrt(n);
-        else {
-            NSLog(@"n = %g cannot be sqrted", n);
-            result = n;
-        }
-    } else if ([operation isEqualToString:@"pi"]) {
-        result = M_PI;
-    } else if ([operation isEqualToString:@"+/-"]) {
-        result = [self popOperand] * -1;
+
     }
     return result;
 }
 
 - (void) resetCalculator {
-    [self.operandStack removeAllObjects];
+    [self.programStack removeAllObjects];
+}
+
++ (double) runProgram:(id)program {
+    /* introspection for id to prevent crash */
+    NSMutableArray* stack;
+    if ([program isKindOfClass:[NSArray class]]) {
+        stack = [program mutableCopy];
+    }
+    /* fewer line is simpler and better, don't handle nil */
+    return [self popOperandOffStack:stack];
 }
 
 - (NSString*) description {
