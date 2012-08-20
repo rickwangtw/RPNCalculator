@@ -21,6 +21,17 @@
 /* synthesize never allocate variable */
 @synthesize programStack = _programStack;
 
++ (BOOL) isStringVariable:(NSString*) str {
+    if ([str length] != 1)
+        return NO;
+    NSError *error = NULL;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[a-z]"                                                                   options:NSRegularExpressionCaseInsensitive                                                                             error:&error];
+    NSUInteger numberOfMatches = [regex numberOfMatchesInString:str                          options:0                                                          range:NSMakeRange(0, [str length])];
+    if (numberOfMatches > 0)
+        return YES;
+    return NO;
+}
+
 /* always use the setter and getter instead of using _operandStack directly */
 - (NSMutableArray*)programStack {
     /* lazy instantiated: initialize when needed */
@@ -119,6 +130,23 @@
     }
     /* fewer line is simpler and better, don't handle nil */
     return [self popOperandOffStack:stack];
+}
+
++ (NSSet*) variablesUsedInProgram:(id) program {
+    NSMutableSet* set;
+    if ([program isKindOfClass:[NSArray class]]) {
+        NSArray* array = (NSArray*) program;
+        for (id obj in array) {
+            if ([obj isKindOfClass:[NSString class]] && [ self isStringVariable:obj]) {
+                if (set == nil) {
+                    set = [[NSMutableSet alloc] initWithObjects:obj, nil];
+                } else {
+                    [set addObject:obj];
+                }
+            }
+        }
+    }
+    return [set copy];
 }
 
 - (NSString*) description {

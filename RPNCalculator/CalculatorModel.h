@@ -19,5 +19,6 @@
 
 + (double) runProgram:(id)program;
 + (NSString*) descriptionOfProgram:(id)program;
-
++ (BOOL) isStringVariable:(NSString*) str;
++ (NSSet*) variablesUsedInProgram:(id) program;
 @end
