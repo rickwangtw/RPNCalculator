@@ -57,6 +57,13 @@
 
 }
 
+- (void) pushVariable:(NSString *)variable {
+    if ([CalculatorModel isStringVariable:variable]) {
+        [self.programStack addObject:variable];
+    }
+    
+}
+
 - (double)performOperation:(NSString*)operation {
     [self.programStack addObject:operation];
     return [CalculatorModel runProgram:self.program];
@@ -123,12 +130,37 @@
 }
 
 + (double) runProgram:(id)program {
+#if 0
     /* introspection for id to prevent crash */
     NSMutableArray* stack;
     if ([program isKindOfClass:[NSArray class]]) {
         stack = [program mutableCopy];
     }
-    /* fewer line is simpler and better, don't handle nil */
+    /* fewer line is [simpler and better, don't handle nil */
+    return [self popOperandOffStack:stack];
+#else
+    return [self runProgram:program usingVariableValues:nil];
+#endif
+}
+
++ (double) runProgram:(id)program usingVariableValues:(NSDictionary*) variableValues {
+    /* introspection for id to prevent crash */
+    NSMutableArray* stack;
+    if ([program isKindOfClass:[NSArray class]]) {
+        stack = [program mutableCopy];
+    }
+    for (int i = 0 ; i < [stack count]; ++i) {
+        id obj = [stack objectAtIndex:i];
+        if ([obj isKindOfClass:[NSString class]] && [CalculatorModel isStringVariable:obj]) {
+            NSNumber* num = @0;
+            if ([[variableValues allKeys] containsObject:obj]) {
+                num = [variableValues objectForKey:obj];
+            }
+            [stack removeObjectAtIndex:i];
+            [stack insertObject:num atIndex:i];
+        }
+    }
+    stack = [stack mutableCopy];
     return [self popOperandOffStack:stack];
 }
 

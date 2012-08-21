@@ -13,11 +13,13 @@
 - (void)pushOperand:(double)operand;
 - (double)performOperation:(NSString*)operation;
 - (void)resetCalculator;
+- (void)pushVariable:(NSString*) variable;
 
 /* use id to gain flexibility of this interface */
 @property (readonly) id program;
 
 + (double) runProgram:(id)program;
++ (double) runProgram:(id)program usingVariableValues:(NSDictionary*) variableValues;
 + (NSString*) descriptionOfProgram:(id)program;
 + (BOOL) isStringVariable:(NSString*) str;
 + (NSSet*) variablesUsedInProgram:(id) program;
