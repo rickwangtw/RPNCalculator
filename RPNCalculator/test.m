@@ -9,13 +9,21 @@ int main(void) {
 		NSLog(@"result of %@ is %i", str, result);
 	}
 
-	NSArray* array = [[NSArray alloc] initWithObjects:@1, @2, @"+", @"x", @"*", @3, @"/", @"y", @"-", @"Z", @"+", nil];
+//	NSArray* array = [[NSArray alloc] initWithObjects:@1, @2, @"+", @"x", @"*", @3, @"/", @"y", @"-", @"Z", @"+", nil];
 //	NSArray* array = [[NSArray alloc] initWithObjects:@1, @2, @"+", @"x", @"/", @3, @"-", nil];
 //	NSArray* array = [[NSArray alloc] initWithObjects:@1, @2, @"+", @2  , @"*", @3, @"/", @4  , @"-", @10 , @"+", nil];
 //	NSArray* array = [[NSArray alloc] initWithObjects:@3, @2, @"+", nil];
 //	NSArray* array = [[NSArray alloc] initWithObjects:@3, @2, @"-", nil];
 //	NSArray* array = [[NSArray alloc] initWithObjects:@3, @2, @"*", nil];
 //	NSArray* array = [[NSArray alloc] initWithObjects:@3, @2, @"/", nil];
+//	NSArray* array = [[NSArray alloc] initWithObjects:@3, @5, @6, @7, @"+", @"*", @"-", nil];
+//	NSArray* array = [[NSArray alloc] initWithObjects:@3, @5, @"+", @"sqrt", nil];
+//	NSArray* array = [[NSArray alloc] initWithObjects:@3, @"sqrt", @"sqrt", nil];
+//	NSArray* array = [[NSArray alloc] initWithObjects:@3, @5, @"sqrt", @"+", nil];
+//	NSArray* array = [[NSArray alloc] initWithObjects:@"pi", @"r", @"r", @"*", @"*", nil]; /* failed */
+//	NSArray* array = [[NSArray alloc] initWithObjects:@"a", @"a", @"*", @"b", @"b", @"*", @"+", @"sqrt", nil];
+//	NSArray* array = [[NSArray alloc] initWithObjects:@3, @5, nil]; /* failed */
+	NSArray* array = [[NSArray alloc] initWithObjects:@3, @5, @"+", @6, @7, @"*", @9, @"sqrt", nil]; /* failed */
 	for (NSString* str in array) {
 		NSLog(@"elements in array: %@", str);
 	}
@@ -32,6 +40,7 @@ int main(void) {
 	double ans = [CalculatorModel runProgram:array];
 #endif
 	NSLog(@"result = %g", ans);
+	NSLog(@"desc = %@", [CalculatorModel descriptionOfProgram:array]);
 
 	return 0;
 }

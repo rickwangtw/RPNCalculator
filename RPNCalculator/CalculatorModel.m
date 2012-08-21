@@ -75,7 +75,42 @@
 }
 
 + (NSString*) descriptionOfProgram:(id)program {
-    return @"Implement this in Assignment 2";
+    if (![program isKindOfClass:[NSArray class]])
+        return nil;
+    NSMutableArray* array = [[NSMutableArray alloc] init];
+    for (id item in program) {
+        if ([item isKindOfClass:[NSNumber class]]) {
+            [array addObject:[NSString stringWithFormat:@"%@", item]];
+        } else if ([item isKindOfClass:[NSString class]]) {
+            if ([CalculatorModel isStringVariable:item]) {
+                [array addObject:item];
+            /* operators */
+            } else {
+                if ([item isEqual:@"+"] || [item isEqual:@"-"] || [item isEqual:@"*"]                                                              || [item isEqual:@"/"]) {
+                    NSString* operand2 = [array lastObject];
+                    [array removeLastObject];
+                    NSString* operand1 = [array lastObject];
+                    [array removeLastObject];
+                    [array addObject:[NSString stringWithFormat:@"(%@ %@ %@)", operand1, item, operand2]];
+                } else if ([item isEqual:@"pi"]) {
+                    [array addObject:item];
+                } else {
+                    NSString* operand = [array lastObject];
+                    [array removeLastObject];
+                    [array addObject:[NSString stringWithFormat:@"%@(%@)", item, operand]];
+                }
+            }
+        }
+    }
+    NSString* ans;
+    for (int i = 0 ; i < array.count; ++i) {
+        if (ans == nil) {
+            ans = [array objectAtIndex:i];
+        } else {
+            ans = [NSString stringWithFormat:@"%@, %@", ans, [array objectAtIndex:i]];
+        }
+    }
+    return ans;
 }
 
 + (double) popOperandOffStack:(NSMutableArray*) stack {
