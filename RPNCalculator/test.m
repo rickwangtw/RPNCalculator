@@ -21,9 +21,9 @@ int main(void) {
 //	NSArray* array = [[NSArray alloc] initWithObjects:@3, @"sqrt", @"sqrt", nil];
 //	NSArray* array = [[NSArray alloc] initWithObjects:@3, @5, @"sqrt", @"+", nil];
 //	NSArray* array = [[NSArray alloc] initWithObjects:@"pi", @"r", @"r", @"*", @"*", nil]; /* failed */
-//	NSArray* array = [[NSArray alloc] initWithObjects:@"a", @"a", @"*", @"b", @"b", @"*", @"+", @"sqrt", nil];
+	NSArray* array = [[NSArray alloc] initWithObjects:@"a", @"a", @"*", @"b", @"b", @"*", @"+", @"sqrt", nil];
 //	NSArray* array = [[NSArray alloc] initWithObjects:@3, @5, nil]; /* failed */
-	NSArray* array = [[NSArray alloc] initWithObjects:@3, @5, @"+", @6, @7, @"*", @9, @"sqrt", nil]; /* failed */
+//	NSArray* array = [[NSArray alloc] initWithObjects:@3, @5, @"+", @6, @7, @"*", @9, @"sqrt", nil]; /* failed */
 	for (NSString* str in array) {
 		NSLog(@"elements in array: %@", str);
 	}

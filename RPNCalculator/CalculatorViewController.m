@@ -9,6 +9,8 @@
 #import "CalculatorViewController.h"
 #import "CalculatorModel.h"
 
+#define SHOW_CMD_BY_DESCRIPTION 1
+
 @interface CalculatorViewController ()
     // for private methods, properties
 @property (nonatomic) BOOL userIsInTheMiddleOfEnteringANumber;
@@ -28,11 +30,15 @@
 @synthesize cmd;
 
 - (void) insertCmdToDisplay:(NSString *)added showEqual:(BOOL)enable {
+#if SHOW_CMD_BY_DESCRIPTION
+    self.cmd = [CalculatorModel descriptionOfProgram:[self.brain program]];
+#else
     if (self.cmd == nil) {
         self.cmd = @"";
     }
     self.cmd = [self.cmd stringByAppendingString:@" "];
     self.cmd = [self.cmd stringByAppendingString:added];
+#endif
     if (enable) {
         self.cmdDisplay.text = [self.cmd stringByAppendingString:@" ="];
     } else {
@@ -102,9 +108,14 @@
     /* save an enter */
     if (self.userIsInTheMiddleOfEnteringANumber)
         [self enterPressed];
+#if ! SHOW_CMD_BY_DESCRIPTION
     [self insertCmdToDisplay:operation showEqual:YES];
+#endif
     
     double result = [self.brain performOperation:operation];
+#if SHOW_CMD_BY_DESCRIPTION
+    [self insertCmdToDisplay:operation showEqual:YES];
+#endif
     if ([operation isEqualToString:@"pi"]) {
         self.skipEnterKey = YES;
     } else {
